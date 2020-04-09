@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendOrganizer.UI", "FriendOrganizer.UI\FriendOrganizer.UI.csproj", "{5879C058-212C-4CB8-9AAD-A78C81E143C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5879C058-212C-4CB8-9AAD-A78C81E143C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5879C058-212C-4CB8-9AAD-A78C81E143C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5879C058-212C-4CB8-9AAD-A78C81E143C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5879C058-212C-4CB8-9AAD-A78C81E143C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD390C36-2EBC-42F8-9701-56120AC3D5B2}
+	EndGlobalSection
+EndGlobal
