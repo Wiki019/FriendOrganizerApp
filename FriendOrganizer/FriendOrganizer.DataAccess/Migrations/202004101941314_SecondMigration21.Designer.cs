@@ -7,13 +7,13 @@ namespace FriendOrganizer.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class InitialDatabase : IMigrationMetadata
+    public sealed partial class SecondMigration21 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SecondMigration21));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004101505187_InitialDatabase"; }
+            get { return "202004101941314_SecondMigration21"; }
         }
         
         string IMigrationMetadata.Source
