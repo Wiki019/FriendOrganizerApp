@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace FriendOrganizer.DataAccess
 {
-    class FriendOrganizerDBContext : DbContext
+    public class FriendOrganizerDBContext : DbContext
     {
         public FriendOrganizerDBContext() : base("FriendOrganizerDb")
         {

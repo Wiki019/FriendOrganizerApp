@@ -9,6 +9,7 @@ namespace FriendOrganizer.UI.Data
         {
             // TODO: Load Data from real DataBase
             yield return new Friend { FirstName = "Waqas", LastName = "Ahmad" };
+            yield return new Friend { FirstName = "Baby", LastName = "Hadid" };
             yield return new Friend { FirstName = "Saima", LastName = "Iqbal" };
             yield return new Friend { FirstName = "Mummy", LastName = "Daddy" };
             yield return new Friend { FirstName = "Kanjos", LastName = "Rajpot" };
