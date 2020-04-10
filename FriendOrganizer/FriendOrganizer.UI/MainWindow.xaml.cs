@@ -16,12 +16,12 @@ namespace FriendOrganizer.UI
             InitializeComponent();
             _viewModelDataContext = viewModel;
             DataContext = _viewModelDataContext;
-            this.Loaded += MainWindow_Loaded;
+            this.Loaded += MainWindow_LoadedAsync;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            _viewModelDataContext.Load();
+            await _viewModelDataContext.LoadAsync();
         }
     }
 }
