@@ -14,7 +14,7 @@
         <ListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                   Grid.Column="0" ItemsSource="{Binding Friends}" 
                   SelectedItem="{Binding SelectedFriend, Mode=TwoWay}"
-                  />
+                  DisplayMemberPath="FirstName"/>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
