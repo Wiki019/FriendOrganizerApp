@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FriendOrganizer.UI"
+        xmlns:view="clr-namespace:FriendOrganizer.UI.View"
         mc:Ignorable="d"
         Title="FriendOrganizer" Height="450" Width="800" FontSize="20">
     <Grid>
@@ -11,28 +12,7 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                  Grid.Column="0" ItemsSource="{Binding Friends}" 
-                  SelectedItem="{Binding SelectedFriend, Mode=TwoWay}"
-                  DisplayMemberPath="FirstName"/>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Content="FirstName" Margin="10 10 10 0"/>
-            <TextBlock Grid.Row="1" Text="{Binding SelectedFriend.FirstName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
-            
-            <Label Content="LastName" Grid.Row="2" Margin="10 0 10 0"/>
-            <TextBlock Grid.Row="3" Text="{Binding SelectedFriend.LastName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
-   
-            <Label Content="Email" Grid.Row="4" Margin="10 0 10 0"/>
-            <TextBlock Grid.Row="5" Text="{Binding SelectedFriend.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
-        </Grid>
+        <view:NavigationView DataContext="{Binding NavigationViewModel}"/>
+        <view:FriendDataView DataContext="{Binding  FriendDataViewModel}" Grid.Column="1"/>
     </Grid>
 </Window>

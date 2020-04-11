@@ -11,10 +11,13 @@ namespace FriendOrganizer.UI.Startup
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<FriendDataService>().As<IFriendDataService>();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<FriendOrganizerDBContext>().AsSelf();
+            builder.RegisterType<LookupDataService>().AsImplementedInterfaces();
+            builder.RegisterType<FriendDataService>().As<IFriendDataService>();
+            builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
+            builder.RegisterType<FriendDataViewModel>().As<IFriendDataViewModel>();
 
             return builder.Build();
         }
