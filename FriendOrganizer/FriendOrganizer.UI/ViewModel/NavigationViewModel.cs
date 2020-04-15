@@ -1,6 +1,8 @@
 ﻿
 using FriendOrganizer.model;
 using FriendOrganizer.UI.Data;
+using FriendOrganizer.UI.Event;
+using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -9,13 +11,16 @@ namespace FriendOrganizer.UI.ViewModel
     public class NavigationViewModel : ViewModelBase, INavigationViewModel
     {
         private IFriendLookupDataService _friendLookupService;
+        private readonly IEventAggregator _eventAggregator;
         private LookupItem _selectedItem;
 
         public ObservableCollection<LookupItem> Friends { get; }
 
-        public NavigationViewModel(IFriendLookupDataService friendLookupService)
+        public NavigationViewModel(IFriendLookupDataService friendLookupService, 
+            IEventAggregator eventAggregator)
         {
             _friendLookupService = friendLookupService;
+            _eventAggregator = eventAggregator;
             Friends = new ObservableCollection<LookupItem>();
         }
 
@@ -36,6 +41,8 @@ namespace FriendOrganizer.UI.ViewModel
             {
                 _selectedItem = value;
                 OnPropertyChanged();
+                _eventAggregator.GetEvent<OpenFriendDataViewEvent>()
+                    .Publish(_selectedItem.Id);
             }
         }
     }
