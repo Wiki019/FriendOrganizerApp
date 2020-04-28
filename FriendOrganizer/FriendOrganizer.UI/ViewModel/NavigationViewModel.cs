@@ -1,27 +1,35 @@
-﻿
-using FriendOrganizer.model;
+﻿using FriendOrganizer.model;
 using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
 using Prism.Events;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FriendOrganizer.UI.ViewModel
 {
     public class NavigationViewModel : ViewModelBase, INavigationViewModel
     {
-        private IFriendLookupDataService _friendLookupService;
+        private readonly IFriendLookupDataService _friendLookupService;
         private readonly IEventAggregator _eventAggregator;
-        private LookupItem _selectedItem;
+        private NavigationItemViewModel _selectedItem;
 
-        public ObservableCollection<LookupItem> Friends { get; }
+        public ObservableCollection<NavigationItemViewModel> Friends { get; }
 
         public NavigationViewModel(IFriendLookupDataService friendLookupService, 
             IEventAggregator eventAggregator)
         {
             _friendLookupService = friendLookupService;
             _eventAggregator = eventAggregator;
-            Friends = new ObservableCollection<LookupItem>();
+            Friends = new ObservableCollection<NavigationItemViewModel>();
+            _eventAggregator.GetEvent<AfterFriendSaveEvents>().Subscribe(AfterFriendSaved);
+        }
+
+        private void AfterFriendSaved(AfterFriendSavedEventArgs obj)
+        {
+            var lookupItem = Friends.Single(ob => ob.Id == obj.ID);
+            lookupItem.DisplayMember = obj.DisplayMember;
         }
 
         public async Task LoadItemsAsync()
@@ -30,19 +38,22 @@ namespace FriendOrganizer.UI.ViewModel
             Friends.Clear();
             foreach (var lookup in lookups)
             {
-                Friends.Add(lookup);
+                Friends.Add(new NavigationItemViewModel(lookup.Id, lookup.DisplayMember));
             }
         }
 
-        public LookupItem SelectedItemLookup
+        public NavigationItemViewModel SelectedItemLookup
         {
             get { return _selectedItem; }
             set
             {
                 _selectedItem = value;
                 OnPropertyChanged();
-                _eventAggregator.GetEvent<OpenFriendDataViewEvent>()
-                    .Publish(_selectedItem.Id);
+                if(_selectedItem != null)
+                {
+                    _eventAggregator.GetEvent<OpenFriendDataViewEvent>()
+                        .Publish(_selectedItem.Id);
+                }
             }
         }
     }

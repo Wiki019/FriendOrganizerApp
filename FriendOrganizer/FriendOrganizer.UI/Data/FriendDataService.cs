@@ -16,12 +16,22 @@ namespace FriendOrganizer.UI.Data
         {
             _contextCreator = contextCreator;
         }
+
         public async Task<Friend> GetByIdAsync(int friendID)
         {
             using (var ctx = _contextCreator())
             {
-
                 return await ctx.Friends.AsNoTracking().SingleAsync(f => f.Id == friendID);
+            }
+        }
+
+        public async Task SaveAsync(Friend friends)
+        {
+            using (var ctx = _contextCreator())
+            {
+                ctx.Friends.Attach(friends);
+                ctx.Entry(friends).State = EntityState.Modified;
+                await ctx.SaveChangesAsync();
             }
         }
     }

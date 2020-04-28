@@ -6,6 +6,6 @@ namespace FriendOrganizer.UI.Data
 {
     public interface IFriendLookupDataService
     {
-        Task<IEnumerable<LookupItem>> GetFriendLookupAsync();
+        Task<IEnumerable<NavigationItemViewModel>> GetFriendLookupAsync();
     }
 }

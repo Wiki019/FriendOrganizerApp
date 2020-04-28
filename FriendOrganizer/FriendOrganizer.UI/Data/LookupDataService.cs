@@ -17,16 +17,16 @@ namespace FriendOrganizer.UI.Data
             _contextCreator = contextCreator;
         }
 
-        public async Task<IEnumerable<LookupItem>> GetFriendLookupAsync()
+        public async Task<IEnumerable<NavigationItemViewModel>> GetFriendLookupAsync()
         {
             using (var ctx = _contextCreator())
             {
                 return await ctx.Friends.AsNoTracking()
                     .Select(f =>
-                    new LookupItem
+                    new NavigationItemViewModel
                     {
                         Id = f.Id,
-                        DisplayMember = f.FirstName +" " +f.LastName
+                        DisplayMember = f.FirstName + " " + f.LastName
                     }).ToListAsync();
             }
         }
