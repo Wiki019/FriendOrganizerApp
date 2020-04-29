@@ -1,6 +1,7 @@
 ﻿using FriendOrganizer.model;
 using FriendOrganizer.UI.Data;
 using FriendOrganizer.UI.Event;
+using FriendOrganizer.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -13,7 +14,7 @@ namespace FriendOrganizer.UI.ViewModel
     {
         private readonly IFriendDataService _friendDataService;
         private readonly IEventAggregator _eventAggregator;
-        private Friend _friend;
+        private FriendWrapper _friend;
 
         public FriendDataViewModel(IFriendDataService friendDataService,
             IEventAggregator eventAggregator)
@@ -26,9 +27,29 @@ namespace FriendOrganizer.UI.ViewModel
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
 
+        public FriendWrapper Friend
+        {
+            get { return _friend; }
+            set
+            {
+                _friend = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SaveCommand { get; }
+
+
+        public async Task LoadAsync(int friendId)
+        {
+            var friend = await _friendDataService.GetByIdAsync(friendId);
+
+            Friend = new FriendWrapper(friend);
+        }
+
         private async void OnSaveExecute()
         {
-            await _friendDataService.SaveAsync(Friend);
+            await _friendDataService.SaveAsync(Friend.Model);
             _eventAggregator.GetEvent<AfterFriendSaveEvents>()
                 .Publish(new AfterFriendSavedEventArgs
                 {
@@ -43,26 +64,9 @@ namespace FriendOrganizer.UI.ViewModel
             return true;
         }
 
-        public async Task LoadAsync(int friendId)
-        {
-            Friend = await _friendDataService.GetByIdAsync(friendId);
-        }
-
         private async void SelectedFriendChangeAsync(int friendId)
         {
             await LoadAsync(friendId);
         }
-
-        public Friend Friend
-        {
-            get { return _friend; }
-            set
-            {
-                _friend = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand SaveCommand { get; }
     }
 }

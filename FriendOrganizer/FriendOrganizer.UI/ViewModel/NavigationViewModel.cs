@@ -28,6 +28,14 @@ namespace FriendOrganizer.UI.ViewModel
 
         private void AfterFriendSaved(AfterFriendSavedEventArgs obj)
         {
+            //foreach (var item in Friends)
+            //{
+            //    if (item.Id != obj.ID)
+            //    {
+            //        item.DisplayMember = obj.DisplayMember;
+            //    }
+            //}
+
             var lookupItem = Friends.Single(ob => ob.Id == obj.ID);
             lookupItem.DisplayMember = obj.DisplayMember;
         }
