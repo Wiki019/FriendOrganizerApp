@@ -62,5 +62,10 @@ namespace FriendOrganizer.UI.Wrapper
             return _errorsByPropertyName.ContainsKey(propertyName) ?
                 _errorsByPropertyName[propertyName] : null;
         }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
     }
 }
