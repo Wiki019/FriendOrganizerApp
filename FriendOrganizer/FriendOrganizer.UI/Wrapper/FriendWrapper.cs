@@ -2,7 +2,9 @@
 using FriendOrganizer.UI.ViewModel;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace FriendOrganizer.UI.Wrapper
 {
@@ -48,13 +50,17 @@ namespace FriendOrganizer.UI.Wrapper
             }
         }
 
-        public bool HasErrors => throw new NotImplementedException();
+        private Dictionary<string, List<string>> _errorsByPropertyName =
+            new Dictionary<string, List<string>>();
+
+        public bool HasErrors => _errorsByPropertyName.Any();
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public IEnumerable GetErrors(string propertyName)
         {
-            throw new NotImplementedException();
+            return _errorsByPropertyName.ContainsKey(propertyName) ?
+                _errorsByPropertyName[propertyName] : null;
         }
     }
 }
