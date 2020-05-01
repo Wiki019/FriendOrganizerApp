@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FriendOrganizer.UI.ViewModel
 {
@@ -15,6 +16,8 @@ namespace FriendOrganizer.UI.ViewModel
         }
 
         public int Id { get; }
+
+        public ICommand OpenFriendDetailViewCommand { get; }
 
         private string _displayMember;
 
