@@ -39,7 +39,7 @@ namespace FriendOrganizer.UI.Wrapper
                 OnPropertyChanged();
             }
         }
-        
+
         public string Email
         {
             get { return Model.Email; }
@@ -50,22 +50,16 @@ namespace FriendOrganizer.UI.Wrapper
             }
         }
 
-        private Dictionary<string, List<string>> _errorsByPropertyName =
-            new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> _errorsByPropertyName
+         = new Dictionary<string, List<string>>();
 
-        public bool HasErrors => _errorsByPropertyName.Any();
+        public bool HasErrors => ErrorDict.Any();
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         public IEnumerable GetErrors(string propertyName)
         {
-            return _errorsByPropertyName.ContainsKey(propertyName) ?
-                _errorsByPropertyName[propertyName] : null;
-        }
 
-        private void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
     }
 }
