@@ -1,65 +1,62 @@
 ﻿using FriendOrganizer.model;
-using FriendOrganizer.UI.ViewModel;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+using System.Windows.Media.Converters;
 
 namespace FriendOrganizer.UI.Wrapper
 {
-    public class FriendWrapper : ViewModelBase, INotifyDataErrorInfo
-    {
-        public FriendWrapper(Friend model)
-        {
-            Model = model;
-        }
 
-        public Friend Model { get; }
+    public class FriendWrapper : ModelWrapper<Friend>
+    {
+        public FriendWrapper(Friend model) : base(model)
+        {
+        }
 
         public int Id { get { return Model.Id; } }
 
 
         public string FirstName
         {
-            get { return Model.FirstName; }
+            get { return GetValue<string>(); }
             set
             {
-                Model.FirstName = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public string LastName
         {
-            get { return Model.LastName; }
-            set
-            {
-                Model.LastName = value;
-                OnPropertyChanged();
-            }
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
         }
 
         public string Email
         {
-            get { return Model.Email; }
+            get { return GetValue<string>(); }
             set
             {
-                Model.Email = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
-        public Dictionary<string, List<string>> _errorsByPropertyName
-         = new Dictionary<string, List<string>>();
-
-        public bool HasErrors => ErrorDict.Any();
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        public IEnumerable GetErrors(string propertyName)
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
         {
+            switch (propertyName)
+            {
+                case nameof(FirstName):
+                    if (string.Equals(FirstName, "Robot", StringComparison.OrdinalIgnoreCase))
+                    {
+                        yield return "Robot is not a valid Friend";
+                    }
+                    break;
 
+                case nameof(LastName):
+                    if (string.Equals(LastName, "Saema"))
+                    {
+                        yield return "Saema is not a valid name";
+                    }
+                    break;
+            }
         }
     }
 }

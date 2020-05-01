@@ -45,6 +45,13 @@ namespace FriendOrganizer.UI.ViewModel
             var friend = await _friendDataService.GetByIdAsync(friendId);
 
             Friend = new FriendWrapper(friend);
+            Friend.PropertyChanged += (s, e) =>
+            {
+                if(e.PropertyName == nameof(Friend.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
         }
 
         private async void OnSaveExecute()
@@ -60,8 +67,7 @@ namespace FriendOrganizer.UI.ViewModel
 
         private bool OnSaveCanExecute()
         {
-            //TODO check if Friend is valid
-            return true;
+            return Friend != null && !Friend.HasErrors;
         }
 
         private async void SelectedFriendChangeAsync(int friendId)
