@@ -1,6 +1,6 @@
 ﻿namespace FriendOrganizer.model
 {
-    public class NavigationItemViewModel
+    public class LookupItem
     {
         public int Id { get; set; }
 

@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202004101941314_SecondMigration21.designer.cs">
       <DependentUpon>202004101941314_SecondMigration21.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005021634128_AddedProgrammingLanguage.cs" />
+    <Compile Include="Migrations\202005021634128_AddedProgrammingLanguage.designer.cs">
+      <DependentUpon>202005021634128_AddedProgrammingLanguage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004101941314_SecondMigration21.resx">
       <DependentUpon>202004101941314_SecondMigration21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005021634128_AddedProgrammingLanguage.resx">
+      <DependentUpon>202005021634128_AddedProgrammingLanguage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
