@@ -15,11 +15,19 @@ namespace FriendOrganizer.UI.View.Services
             return result == MessageBoxResult.OK ?
                 MessageDialogResult.Ok : MessageDialogResult.Cancel;
         }
+
+        public MessageDialogResult ShowYesNoDialog(string text, string title)
+        {
+            var result = MessageBox.Show(text, title, MessageBoxButton.YesNo);
+            return result == MessageBoxResult.Yes ? MessageDialogResult.Yes : MessageDialogResult.No;
+        }
     }
 
     public enum MessageDialogResult
     {
         Ok,
-        Cancel
+        Cancel,
+        Yes,
+        No
     }
 }
